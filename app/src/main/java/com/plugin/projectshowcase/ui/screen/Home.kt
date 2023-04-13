@@ -4,10 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -39,7 +36,7 @@ fun Home () {
             }
         }
          items(state) { photos : Photos ->
-
+             PhotosListItem(photos = photos)
          }
     }
 }
@@ -53,9 +50,22 @@ fun PhotosListItem( photos : Photos ) {
         Box {
            Image(painter = imagePainter,
                contentDescription = "image",
-           modifier = Modifier.fillMaxWidth().height(100.dp),
+           modifier = Modifier
+               .fillMaxWidth()
+               .height(150.dp),
                contentScale = ContentScale.FillBounds
            )
+            Surface(
+                color = MaterialTheme.colors.onSurface.copy(alpha = .3f),
+                modifier = Modifier.align(Alignment.BottomCenter),
+                contentColor = MaterialTheme.colors.surface
+            ) {
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(4.dp)) {
+                    Text(text = photos.title)
+                }
+            }
         }
     }
 }
